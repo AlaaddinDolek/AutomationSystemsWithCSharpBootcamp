@@ -139,8 +139,10 @@ namespace OvertimePayment
                     case "3":
                         Console.Write("TC: ");
                         string inputTC = Console.ReadLine();
+                        bool isTcOk = false;
                         try
                         {
+                            
                             int intTC = Convert.ToInt32(inputTC);
                             if (inputTC.Length != 4)
                             {
@@ -154,6 +156,7 @@ namespace OvertimePayment
                                     Console.WriteLine("Girilen TC numarasına ait personel mevcuttur.");
                                     break;
                                 }
+                                isTcOk = true;
                             }
                         }
                         catch
@@ -162,21 +165,25 @@ namespace OvertimePayment
                             break;
                         }
 
-
-                        Console.Write("İsim: ");
-                        string name = Console.ReadLine();
-
-                        Console.Write("Soyisim: ");
-                        string lastName = Console.ReadLine();
-
-                        Employee employee = new Employee()
+                        if(isTcOk==true)
                         {
-                            TC = Convert.ToInt32(inputTC),
-                            Name = name,
-                            LastName = lastName
-                        };
-                        employees.Add(employee);
+                            Console.Write("İsim: ");
+                            string name = Console.ReadLine().ToLower();
+
+                            Console.Write("Soyisim: ");
+                            string lastName = Console.ReadLine().ToLower();
+
+                            Employee employee = new Employee()
+                            {
+                                TC = Convert.ToInt32(inputTC),
+                                Name = name,
+                                LastName = lastName
+                            };
+                            employees.Add(employee);
+                            break;
+                        }
                         break;
+                       
 
                     default:
 
